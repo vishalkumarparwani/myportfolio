@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vishal Kumar Parwani | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --- CSS VARIABLES & RESET --- */
+    :root {
+      --bg-color: #0d0f17;
+      --card-bg: rgba(22, 27, 42, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #00f2fe;
+      --secondary: #4facfe;
+      --accent: #6366f1;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --font-sans: 'Inter', sans-serif;
+      --font-mono: 'Fira Code', monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* --- BACKGROUND GLOW ANIMATION --- */
+    .ambient-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .glow-1, .glow-2 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(140px);
+      opacity: 0.25;
+      animation: float 12s infinite alternate ease-in-out;
+    }
+
+    .glow-1 {
+      top: -10%;
+      left: -10%;
+      background: var(--primary);
+    }
+
+    .glow-2 {
+      bottom: -10%;
+      right: -10%;
+      background: var(--accent);
+      animation-delay: -6s;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(100px, 80px) scale(1.2); }
+    }
+
+    /* --- NAVIGATION --- */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 8%;
+      background: rgba(13, 15, 23, 0.8);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .logo {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --- SECTIONS --- */
+    section {
+      padding: 7rem 8% 4rem;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--card-border);
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      color: var(--primary);
+      font-size: 1rem;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      align-items: flex-start;
+      min-height: 90vh;
+    }
+
+    .hero-badge {
+      font-family: var(--font-mono);
+      color: var(--primary);
+      background: rgba(0, 242, 254, 0.1);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 600px;
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.8rem 1.8rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #0d0f17;
+      box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(0, 242, 254, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* --- SKILLS GRID --- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 1.2rem;
+      border-radius: 12px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+    }
+
+    /* --- PROJECTS GRID --- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 242, 254, 0.4);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .folder-icon {
+      color: var(--primary);
+      font-size: 1.8rem;
+    }
+
+    .project-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .project-links a:hover {
+      color: var(--primary);
+    }
+
+    .project-title {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--primary);
+    }
+
+    .tech-stack li {
+      background: rgba(0, 242, 254, 0.08);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--card-border);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 5%; }
+      section { padding: 6rem 5% 3rem; }
+      .nav-links { gap: 1rem; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <nav>
+    <a href="#" class="logo">&lt;VKP /&gt;</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+  </nav>
+
+  <section id="about" class="hero">
+    <span class="hero-badge">Software Engineer & AI Enthusiast</span>
+    <h1>Building intelligent <br><span class="gradient-text">digital systems.</span></h1>
+    <p>I specialize in full-stack architecture, machine learning implementations, and building robust, high-performance web applications.</p>
+    <div class="btn-group">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="https://github.com/vishalkumarparwani" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub Profile</a>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title"><span class="tag">01.</span> Core Technologies</h2>
+    <div class="skills-grid">
+      <div class="skill-card">Python</div>
+      <div class="skill-card">FastAPI</div>
+      <div class="skill-card">React</div>
+      <div class="skill-card">C++</div>
+      <div class="skill-card">SQL</div>
+      <div class="skill-card">Tailwind CSS</div>
+      <div class="skill-card">Git / GitHub</div>
+      <div class="skill-card">Artificial Intelligence</div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="section-title"><span class="tag">02.</span> Featured Work</h2>
+    <div class="projects-grid">
+      
+      <div class="project-card">
+        <div>
+          <div class="project-header">
+            <span class="folder-icon">&#128193;</span>
+            <div class="project-links">
+              <a href="https://github.com/vishalkumarparwani/contexture" target="_blank" rel="noopener noreferrer">
+                <span>GitHub</span> &#8599;
+              </a>
+            </div>
+          </div>
+          <h3 class="project-title">Contexture</h3>
+          <p class="project-desc">A context-aware engine designed for processing complex datasets and orchestrating structured information flow.</p>
+        </div>
+        <ul class="tech-stack">
+          <li>Python</li>
+          <li>AI/ML</li>
+          <li>FastAPI</li>
+        </ul>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-header">
+            <span class="folder-icon">&#128193;</span>
+            <div class="project-links">
+              <a href="https://github.com/vishalkumarparwani/OrbitFlow" target="_blank" rel="noopener noreferrer">
+                <span>GitHub</span> &#8599;
+              </a>
+            </div>
+          </div>
+          <h3 class="project-title">Orbit AI (OrbitFlow)</h3>
+          <p class="project-desc">An intelligent workflow automation system built to streamline agentic task execution and pipeline routing.</p>
+        </div>
+        <ul class="tech-stack">
+          <li>Python</li>
+          <li>Automation</li>
+          <li>AI Agents</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; Vishal Kumar Parwani. Built with HTML, CSS, & JavaScript.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('mousemove', (e) => {
+      const glow1 = document.querySelector('.glow-1');
+      const x = e.clientX / window.innerWidth * 50;
+      const y = e.clientY / window.innerHeight * 50;
+      glow1.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  </script>
+</body>
+</html>
